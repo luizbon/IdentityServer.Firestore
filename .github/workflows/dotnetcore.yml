@@ -18,4 +18,6 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build
-      run: sudo ./build.sh
+      run: build.sh
+      shell: bash
+      working-directory: ./
