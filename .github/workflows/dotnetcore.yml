@@ -33,7 +33,7 @@ jobs:
       run: dotnet run --project build
       working-directory: ./src/IdentityServer4.Firestore/
 
-      - name: Avert your eyes!
+    - name: Replace NuGet.config token
       run: cat .github/NuGet.config | sed -e "s#GITHUB_KEY#${{ secrets.GITHUB_TOKEN }}#" > NuGet.config
 
     - name: Publish GitHub
