@@ -32,3 +32,6 @@ jobs:
     - name: Build Firestore
       run: dotnet run --project build
       working-directory: ./src/IdentityServer4.Firestore/
+
+    - name: Publish GitHub
+      run: dotnet nuget push nuget/**/*.nupkg --source "github" -api-key ${{ secrets.GITHUB_TOKEN }}
