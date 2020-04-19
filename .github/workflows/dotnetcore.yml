@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -18,5 +18,5 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build
-      run: build.sh
-      shell: bash
+      run: ./build.ps1
+      shell: powershell
