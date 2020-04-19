@@ -19,6 +19,12 @@ jobs:
       with:
         dotnet-version: 3.1.200
 
+    - name: Create NuGet folder
+      run: mkdir nuget
+
+    - name: Dotnet restore
+      run: dotnet tool restore
+
     - name: Build Firestore Storage
       run: dotnet run --project build
       working-directory: ./src/IdentityServer4.Firestore.Storage/
