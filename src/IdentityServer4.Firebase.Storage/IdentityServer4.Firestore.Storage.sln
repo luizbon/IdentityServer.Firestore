@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Firestore.Storage", "src\IdentityServer4.Firestore.Storage.csproj", "{81FEBA57-01A0-42B1-B6B7-FCDA174AEBB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81FEBA57-01A0-42B1-B6B7-FCDA174AEBB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FEBA57-01A0-42B1-B6B7-FCDA174AEBB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81FEBA57-01A0-42B1-B6B7-FCDA174AEBB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81FEBA57-01A0-42B1-B6B7-FCDA174AEBB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8971D1E-B1B0-470D-9CA1-6B92102D8915}
+	EndGlobalSection
+EndGlobal
