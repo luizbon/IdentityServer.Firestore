@@ -12,12 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.200
+        source-url: https://nuget.pkg.github.com/luizbon/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Create NuGet folder
       run: mkdir nuget
@@ -33,8 +36,5 @@ jobs:
       run: dotnet run --project build
       working-directory: ./src/IdentityServer4.Firestore/
 
-    - name: Replace NuGet.config token
-      run: cat .github/NuGet.config | sed -e "s#GITHUB_KEY#${{ secrets.GITHUB_TOKEN }}#" > NuGet.config
-
     - name: Publish GitHub
-      run: dotnet nuget push -s GitHub nuget/**/*.nupkg
+      run: dotnet nuget push nuget/**/*.nupkg
