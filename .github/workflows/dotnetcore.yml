@@ -34,4 +34,4 @@ jobs:
       working-directory: ./src/IdentityServer4.Firestore/
 
     - name: Publish GitHub
-      run: dotnet nuget push nuget/**/*.nupkg --source https://nuget.pkg.github.com/luizbon/index.json -api-key ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push nuget/**/*.nupkg --source https://nuget.pkg.github.com/luizbon/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
