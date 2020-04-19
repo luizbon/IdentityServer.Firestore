@@ -4,7 +4,7 @@ New-Item -ItemType Directory -Force -Path ./nuget
 
 dotnet tool restore
 
-Push-Location ./src/IdentityServer4.Firebase.Storage
+Push-Location ./src/IdentityServer4.Firestore.Storage
 ./build.ps1 $args
 Pop-Location
 
