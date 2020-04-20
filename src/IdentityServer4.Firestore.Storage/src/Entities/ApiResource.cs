@@ -22,11 +22,11 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public List<Secret> Secrets { get; set; }
         [FirestoreProperty]
-        public List<ApiResourceScope> Scopes { get; set; }
+        public List<string> Scopes { get; set; }
         [FirestoreProperty]
-        public List<UserClaim> UserClaims { get; set; }
+        public List<string> UserClaims { get; set; }
         [FirestoreProperty]
-        public List<Property> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
         [FirestoreProperty]
         public DateTime Created { get; set; } = DateTime.UtcNow;
         [FirestoreProperty]

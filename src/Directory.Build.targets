@@ -7,7 +7,7 @@
     <IdentityServerVersion>4.0.0-*</IdentityServerVersion>
     <GoogleVersion>2.0.0-*</GoogleVersion>
 
-    <FirestoreVersion>0.0.0-*</FirestoreVersion>
+    <FirestoreVersion>0.0.2-*</FirestoreVersion>
   </PropertyGroup>
 
   <ItemGroup>

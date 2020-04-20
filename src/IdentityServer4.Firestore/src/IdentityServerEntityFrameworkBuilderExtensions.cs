@@ -13,8 +13,15 @@ namespace IdentityServer4.Firestore
 {
     public static class IdentityServerFirestoreBuilderExtensions
     {
-        public static IIdentityServerBuilder AddConfigurationStore(
-            this IIdentityServerBuilder builder,
+        public static IIdentityServerBuilder AddFirestore(this IIdentityServerBuilder builder,
+            Action<FirestoreOptions> storeOptionsAction = null)
+        {
+            builder.Services.AddFirestore(storeOptionsAction);
+
+            return builder;
+        }
+
+        public static IIdentityServerBuilder AddConfigurationStore(this IIdentityServerBuilder builder,
             Action<ConfigurationStoreOptions> storeOptionsAction = null)
         {
             return builder.AddConfigurationStore<ConfigurationDbContext>(storeOptionsAction);

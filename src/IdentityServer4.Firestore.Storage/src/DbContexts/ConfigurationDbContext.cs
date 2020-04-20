@@ -16,12 +16,14 @@ namespace IdentityServer4.Firestore.Storage.DbContexts
         public ConfigurationDbContext(FirestoreOptions options, ConfigurationStoreOptions storeOptions)
             : base(options)
         {
-            Clients = Database.Collection($"{storeOptions.Clients.Parent}/{storeOptions.Clients.Name}");
-            ApiResources = Database.Collection($"{storeOptions.ApiResources.Parent}/{storeOptions.ApiResources.Name}");
-            IdentityResources = Database.Collection($"{storeOptions.IdentityResources.Parent}/{storeOptions.IdentityResources.Name}");
-            ApiScopes = Database.Collection($"{storeOptions.ApiScopes.Parent}/{storeOptions.ApiScopes.Name}");
+            Schema = Database.Document($"{Constants.IdentityServer}/{storeOptions.Schema}");
+            Clients = Schema.Collection(storeOptions.Clients);
+            ApiResources = Schema.Collection(storeOptions.ApiResources);
+            IdentityResources = Schema.Collection(storeOptions.IdentityResources);
+            ApiScopes = Schema.Collection(storeOptions.ApiScopes);
         }
 
+        private DocumentReference Schema { get; }
         public CollectionReference Clients { get; }
         public CollectionReference ApiResources { get; }
         public CollectionReference IdentityResources { get; }

@@ -21,8 +21,8 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public bool ShowInDiscoveryDocument { get; set; } = true;
         [FirestoreProperty]
-        public List<UserClaim> UserClaims { get; set; }
+        public List<string> UserClaims { get; set; }
         [FirestoreProperty]
-        public List<Property> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
     }
 }

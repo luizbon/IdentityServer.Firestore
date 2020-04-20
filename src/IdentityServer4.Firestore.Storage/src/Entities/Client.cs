@@ -32,7 +32,7 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
         [FirestoreProperty]
-        public List<ClientGrantType> AllowedGrantTypes { get; set; }
+        public List<string> AllowedGrantTypes { get; set; }
         [FirestoreProperty]
         public bool RequirePkce { get; set; }
         [FirestoreProperty]
@@ -40,9 +40,9 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public bool AllowAccessTokensViaBrowser { get; set; }
         [FirestoreProperty]
-        public List<ClientRedirectUri> RedirectUris { get; set; }
+        public List<string> RedirectUris { get; set; }
         [FirestoreProperty]
-        public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris { get; set; }
+        public List<string> PostLogoutRedirectUris { get; set; }
         [FirestoreProperty]
         public string FrontChannelLogoutUri { get; set; }
         [FirestoreProperty]
@@ -54,7 +54,7 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public bool AllowOfflineAccess { get; set; }
         [FirestoreProperty]
-        public List<ClientScope> AllowedScopes { get; set; }
+        public List<string> AllowedScopes { get; set; }
         [FirestoreProperty]
         public int IdentityTokenLifetime { get; set; } = 300;
         [FirestoreProperty]
@@ -78,7 +78,7 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public bool EnableLocalLogin { get; set; } = true;
         [FirestoreProperty]
-        public List<ClientIdPRestriction> IdentityProviderRestrictions { get; set; }
+        public List<string> IdentityProviderRestrictions { get; set; }
         [FirestoreProperty]
         public bool IncludeJwtId { get; set; }
         [FirestoreProperty]
@@ -90,9 +90,9 @@ namespace IdentityServer4.Firestore.Storage.Entities
         [FirestoreProperty]
         public string PairWiseSubjectSalt { get; set; }
         [FirestoreProperty]
-        public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
+        public List<string> AllowedCorsOrigins { get; set; }
         [FirestoreProperty]
-        public List<Property> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
         [FirestoreProperty]
         public int? UserSsoLifetime { get; set; }
         [FirestoreProperty]

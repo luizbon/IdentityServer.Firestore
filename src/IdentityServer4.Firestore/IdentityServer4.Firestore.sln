@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Firestore", "src\IdentityServer4.Firestore.csproj", "{55FC202C-298C-48C7-A2AA-B3807962EB97}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{833A8BA3-858C-40EE-9963-0A25001806AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Host", "host\Host.csproj", "{CF2A2F33-F0B1-4A57-9859-9F33805A0442}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,17 @@ Global
 		{55FC202C-298C-48C7-A2AA-B3807962EB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55FC202C-298C-48C7-A2AA-B3807962EB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55FC202C-298C-48C7-A2AA-B3807962EB97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF2A2F33-F0B1-4A57-9859-9F33805A0442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF2A2F33-F0B1-4A57-9859-9F33805A0442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF2A2F33-F0B1-4A57-9859-9F33805A0442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF2A2F33-F0B1-4A57-9859-9F33805A0442}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55FC202C-298C-48C7-A2AA-B3807962EB97} = {833A8BA3-858C-40EE-9963-0A25001806AD}
+		{CF2A2F33-F0B1-4A57-9859-9F33805A0442} = {833A8BA3-858C-40EE-9963-0A25001806AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {212EA908-8CA9-4D62-8F43-884D2E0A1AE7}

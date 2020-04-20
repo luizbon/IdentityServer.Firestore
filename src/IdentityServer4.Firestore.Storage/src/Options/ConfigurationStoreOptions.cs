@@ -2,9 +2,10 @@
 {
     public class ConfigurationStoreOptions
     {
-        public CollectionConfiguration Clients { get; set; } = new CollectionConfiguration(Constants.Clients, Constants.IdentityServer);
-        public CollectionConfiguration ApiResources { get; set; } = new CollectionConfiguration(Constants.ApiResources, Constants.IdentityServer);
-        public CollectionConfiguration IdentityResources { get; set; } = new CollectionConfiguration(Constants.IdentityResources, Constants.IdentityServer);
-        public CollectionConfiguration ApiScopes { get; set; } = new CollectionConfiguration(Constants.ApiScopes, Constants.IdentityServer);
+        public string Schema { get; set; } = Constants.ConfigurationStore;
+        public string Clients { get; set; } = Constants.Clients;
+        public string ApiResources { get; set; } = Constants.ApiResources;
+        public string IdentityResources { get; set; } = Constants.IdentityResources;
+        public string ApiScopes { get; set; } = Constants.ApiScopes;
     }
 }

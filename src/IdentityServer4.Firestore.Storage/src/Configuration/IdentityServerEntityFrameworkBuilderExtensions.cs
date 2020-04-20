@@ -12,8 +12,8 @@ namespace IdentityServer4.Firestore.Storage.Configuration
             Action<FirestoreOptions> firestoreOptionAction = null)
         {
             var options = new FirestoreOptions();
-            services.AddSingleton(options);
             firestoreOptionAction?.Invoke(options);
+            services.AddSingleton(options);
 
             return services;
         }
@@ -29,8 +29,8 @@ namespace IdentityServer4.Firestore.Storage.Configuration
             where TContext : FirestoreDbContext, IConfigurationDbContext
         {
             var options = new ConfigurationStoreOptions();
-            services.AddSingleton(options);
             storeOptionsAction?.Invoke(options);
+            services.AddSingleton(options);
 
             services.AddScoped<IConfigurationDbContext, TContext>();
 
@@ -48,9 +48,9 @@ namespace IdentityServer4.Firestore.Storage.Configuration
             where TContext : FirestoreDbContext, IPersistedGrantDbContext
         {
             var storeOptions = new OperationalStoreOptions();
-            services.AddSingleton(storeOptions);
             storeOptionsAction?.Invoke(storeOptions);
-            
+            services.AddSingleton(storeOptions);
+
             services.AddScoped<IPersistedGrantDbContext, TContext>();
             services.AddTransient<TokenCleanupService>();
 

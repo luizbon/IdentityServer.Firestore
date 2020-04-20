@@ -3,6 +3,8 @@
     public class Constants
     {
         public const string IdentityServer = nameof(IdentityServer);
+        public const string ConfigurationStore = nameof(ConfigurationStore);
+        public const string OperationalStore = nameof(OperationalStore);
         public const string Clients = nameof(Clients);
         public const string PersistedGrants = nameof(PersistedGrants);
         public const string DeviceFlowCodes = nameof(DeviceFlowCodes);

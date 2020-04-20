@@ -57,7 +57,6 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
             {
                 var expiredGrants = (await _persistedGrantDbContext.PersistedGrants
                         .WhereLessThan(nameof(PersistedGrant.Expiration), DateTime.UtcNow)
-                        .OrderBy(nameof(PersistedGrant.Key))
                         .Limit(_options.TokenCleanupBatchSize)
                         .GetSnapshotAsync()
                         .ConfigureAwait(false))
@@ -90,7 +89,6 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
             {
                 var expiredCodes = (await _persistedGrantDbContext.DeviceFlowCodes
                         .WhereLessThan(nameof(DeviceFlowCodes.Expiration), DateTime.UtcNow)
-                        .OrderBy(nameof(DeviceFlowCodes.DeviceCode))
                         .Limit(_options.TokenCleanupBatchSize)
                         .GetSnapshotAsync()
                         .ConfigureAwait(false))
