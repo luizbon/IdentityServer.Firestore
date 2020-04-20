@@ -8,6 +8,16 @@ namespace IdentityServer4.Firestore.Storage.Configuration
 {
     public static class IdentityServerFirestoreBuilderExtensions
     {
+        public static IServiceCollection AddFirestore(this IServiceCollection services,
+            Action<FirestoreOptions> firestoreOptionAction = null)
+        {
+            var options = new FirestoreOptions();
+            services.AddSingleton(options);
+            firestoreOptionAction?.Invoke(options);
+
+            return services;
+        }
+
         public static IServiceCollection AddConfigurationDbContext(this IServiceCollection services,
             Action<ConfigurationStoreOptions> storeOptionsAction = null)
         {
