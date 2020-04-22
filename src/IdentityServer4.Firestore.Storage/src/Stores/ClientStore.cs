@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Cloud.Firestore;
 using IdentityServer4.Firestore.Storage.DbContexts;
+using IdentityServer4.Firestore.Storage.Mappers;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
-using Mapster;
 using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4.Firestore.Storage.Stores
 {
-    public class ClientStore: IClientStore
+    public class ClientStore : IClientStore
     {
         private readonly IConfigurationDbContext _context;
         private readonly ILogger<ClientStore> _logger;
@@ -22,14 +23,17 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
-            var client = (await _context.Clients
+            DocumentSnapshot client = (await _context.Clients
                 .WhereEqualTo(nameof(Client.ClientId), clientId)
                 .Limit(1)
                 .GetSnapshotAsync().ConfigureAwait(false)).First();
 
-            if (!client.Exists) return null;
+            if (!client.Exists)
+            {
+                return null;
+            }
 
-            var model = client.ConvertTo<Entities.Client>().Adapt<Client>();
+            Client model = client.ConvertTo<Entities.Client>().ToModel();
 
             _logger.LogDebug("{clientId} found in database: {clientIdFound}", clientId, model != null);
 

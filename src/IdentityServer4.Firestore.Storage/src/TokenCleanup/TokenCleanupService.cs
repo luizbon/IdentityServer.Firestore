@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Google.Cloud.Firestore;
@@ -11,10 +12,10 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
 {
     public class TokenCleanupService
     {
+        private readonly ILogger<TokenCleanupService> _logger;
+        private readonly IOperationalStoreNotification _operationalStoreNotification;
         private readonly OperationalStoreOptions _options;
         private readonly IPersistedGrantDbContext _persistedGrantDbContext;
-        private readonly IOperationalStoreNotification _operationalStoreNotification;
-        private readonly ILogger<TokenCleanupService> _logger;
 
         public TokenCleanupService(
             OperationalStoreOptions options,
@@ -24,14 +25,15 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             if (_options.TokenCleanupBatchSize < 1)
+            {
                 throw new ArgumentException("Token cleanup batch size interval must be at least 1");
+            }
 
             _persistedGrantDbContext = persistedGrantDbContext ??
                                        throw new ArgumentNullException(nameof(persistedGrantDbContext));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             _operationalStoreNotification = operationalStoreNotification;
-
         }
 
         public async Task RemoveExpiredGrantsAsync()
@@ -51,11 +53,11 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
 
         protected virtual async Task RemoveGrantsAsync()
         {
-            var found = int.MaxValue;
+            int found = int.MaxValue;
 
             while (found >= _options.TokenCleanupBatchSize)
             {
-                var expiredGrants = (await _persistedGrantDbContext.PersistedGrants
+                DocumentSnapshot[] expiredGrants = (await _persistedGrantDbContext.PersistedGrants
                         .WhereLessThan(nameof(PersistedGrant.Expiration), DateTime.UtcNow)
                         .Limit(_options.TokenCleanupBatchSize)
                         .GetSnapshotAsync()
@@ -65,11 +67,14 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
                 found = expiredGrants.Length;
                 _logger.LogInformation("Removing {grantCount} grants", found);
 
-                if (found <= 0) continue;
+                if (found <= 0)
+                {
+                    continue;
+                }
 
-                var removedGrants = expiredGrants.Select(x => x.ConvertTo<PersistedGrant>());
+                IEnumerable<PersistedGrant> removedGrants = expiredGrants.Select(x => x.ConvertTo<PersistedGrant>());
 
-                foreach (var expiredGrant in expiredGrants)
+                foreach (DocumentSnapshot expiredGrant in expiredGrants)
                 {
                     await expiredGrant.Reference.DeleteAsync(Precondition.None);
                 }
@@ -83,11 +88,11 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
 
         protected virtual async Task RemoveDeviceCodesAsync()
         {
-            var found = int.MaxValue;
+            int found = int.MaxValue;
 
             while (found >= _options.TokenCleanupBatchSize)
             {
-                var expiredCodes = (await _persistedGrantDbContext.DeviceFlowCodes
+                DocumentSnapshot[] expiredCodes = (await _persistedGrantDbContext.DeviceFlowCodes
                         .WhereLessThan(nameof(DeviceFlowCodes.Expiration), DateTime.UtcNow)
                         .Limit(_options.TokenCleanupBatchSize)
                         .GetSnapshotAsync()
@@ -96,12 +101,15 @@ namespace IdentityServer4.Firestore.Storage.TokenCleanup
 
                 found = expiredCodes.Length;
                 _logger.LogInformation("Removing {deviceCodeCount} device flow codes", found);
-                
-                if (found <= 0) continue;
 
-                var removedCodes = expiredCodes.Select(x => x.ConvertTo<DeviceFlowCodes>());
+                if (found <= 0)
+                {
+                    continue;
+                }
 
-                foreach (var expiredCode in expiredCodes)
+                IEnumerable<DeviceFlowCodes> removedCodes = expiredCodes.Select(x => x.ConvertTo<DeviceFlowCodes>());
+
+                foreach (DocumentSnapshot expiredCode in expiredCodes)
                 {
                     await expiredCode.Reference.DeleteAsync(Precondition.None);
                 }

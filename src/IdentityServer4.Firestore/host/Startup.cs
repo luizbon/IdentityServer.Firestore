@@ -1,9 +1,6 @@
 ﻿using Host.Extensions;
-using Host.QuickStart;
-using Host.SeedData;
+using Host.QuickStart.UI;
 using IdentityServer4.Firestore;
-using IdentityServer4.Firestore.Storage.Configuration;
-using IdentityServer4.Firestore.Storage.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

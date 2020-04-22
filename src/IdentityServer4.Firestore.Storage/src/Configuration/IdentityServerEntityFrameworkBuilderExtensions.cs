@@ -11,7 +11,7 @@ namespace IdentityServer4.Firestore.Storage.Configuration
         public static IServiceCollection AddFirestore(this IServiceCollection services,
             Action<FirestoreOptions> firestoreOptionAction = null)
         {
-            var options = new FirestoreOptions();
+            FirestoreOptions options = new FirestoreOptions();
             firestoreOptionAction?.Invoke(options);
             services.AddSingleton(options);
 
@@ -28,7 +28,7 @@ namespace IdentityServer4.Firestore.Storage.Configuration
             Action<ConfigurationStoreOptions> storeOptionsAction = null)
             where TContext : FirestoreDbContext, IConfigurationDbContext
         {
-            var options = new ConfigurationStoreOptions();
+            ConfigurationStoreOptions options = new ConfigurationStoreOptions();
             storeOptionsAction?.Invoke(options);
             services.AddSingleton(options);
 
@@ -47,7 +47,7 @@ namespace IdentityServer4.Firestore.Storage.Configuration
             Action<OperationalStoreOptions> storeOptionsAction = null)
             where TContext : FirestoreDbContext, IPersistedGrantDbContext
         {
-            var storeOptions = new OperationalStoreOptions();
+            OperationalStoreOptions storeOptions = new OperationalStoreOptions();
             storeOptionsAction?.Invoke(storeOptions);
             services.AddSingleton(storeOptions);
 

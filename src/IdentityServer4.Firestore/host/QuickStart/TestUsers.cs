@@ -3,7 +3,7 @@ using System.Security.Claims;
 using IdentityModel;
 using IdentityServer4.Test;
 
-namespace Host.QuickStart
+namespace Host.QuickStart.UI
 {
     public class TestUsers
     {

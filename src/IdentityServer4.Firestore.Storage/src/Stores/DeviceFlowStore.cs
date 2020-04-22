@@ -12,11 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4.Firestore.Storage.Stores
 {
-    public class DeviceFlowStore: IDeviceFlowStore
+    public class DeviceFlowStore : IDeviceFlowStore
     {
         private readonly IPersistedGrantDbContext _context;
-        private readonly IPersistentGrantSerializer _serializer;
         private readonly ILogger<DeviceFlowStore> _logger;
+        private readonly IPersistentGrantSerializer _serializer;
 
         public DeviceFlowStore(IPersistedGrantDbContext context,
             IPersistentGrantSerializer serializer,
@@ -34,11 +34,15 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         public async Task<DeviceCode> FindByUserCodeAsync(string userCode)
         {
-            var deviceFlowCodes = await GetDeviceFlow(nameof(DeviceFlowCodes.UserCode), userCode).ConfigureAwait(false);
+            DocumentSnapshot deviceFlowCodes =
+                await GetDeviceFlow(nameof(DeviceFlowCodes.UserCode), userCode).ConfigureAwait(false);
 
-            if (!deviceFlowCodes.Exists) return null;
+            if (!deviceFlowCodes.Exists)
+            {
+                return null;
+            }
 
-            var model = ToModel(deviceFlowCodes.ConvertTo<DeviceFlowCodes>().Data);
+            DeviceCode model = ToModel(deviceFlowCodes.ConvertTo<DeviceFlowCodes>().Data);
 
             _logger.LogDebug("{userCode} found in database: {userCodeFound}", userCode, model != null);
 
@@ -47,11 +51,15 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         public async Task<DeviceCode> FindByDeviceCodeAsync(string deviceCode)
         {
-            var deviceFlowCodes = await GetDeviceFlow(nameof(DeviceFlowCodes.DeviceCode), deviceCode).ConfigureAwait(false);
+            DocumentSnapshot deviceFlowCodes =
+                await GetDeviceFlow(nameof(DeviceFlowCodes.DeviceCode), deviceCode).ConfigureAwait(false);
 
-            if (!deviceFlowCodes.Exists) return null;
+            if (!deviceFlowCodes.Exists)
+            {
+                return null;
+            }
 
-            var model = ToModel(deviceFlowCodes.ConvertTo<DeviceFlowCodes>().Data);
+            DeviceCode model = ToModel(deviceFlowCodes.ConvertTo<DeviceFlowCodes>().Data);
 
             _logger.LogDebug("{deviceCode} found in database: {deviceCodeFound}", deviceCode, model != null);
 
@@ -60,16 +68,17 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         public async Task UpdateByUserCodeAsync(string userCode, DeviceCode data)
         {
-            var deviceFlowCodes = await GetDeviceFlow(nameof(DeviceFlowCodes.UserCode), userCode).ConfigureAwait(false);
+            DocumentSnapshot deviceFlowCodes =
+                await GetDeviceFlow(nameof(DeviceFlowCodes.UserCode), userCode).ConfigureAwait(false);
             if (!deviceFlowCodes.Exists)
             {
                 _logger.LogError("{userCode} not found in database", userCode);
                 throw new InvalidOperationException("Could not update device code");
             }
 
-            var existing = deviceFlowCodes.ConvertTo<DeviceFlowCodes>();
+            DeviceFlowCodes existing = deviceFlowCodes.ConvertTo<DeviceFlowCodes>();
 
-            var entity = ToEntity(data, existing.DeviceCode, userCode);
+            DeviceFlowCodes entity = ToEntity(data, existing.DeviceCode, userCode);
             _logger.LogDebug("{userCode} found in database", userCode);
 
             existing.SubjectId = data.Subject?.FindFirst(JwtClaimTypes.Subject).Value;
@@ -80,7 +89,8 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         public async Task RemoveByDeviceCodeAsync(string deviceCode)
         {
-            var deviceFlowCodes = await GetDeviceFlow(nameof(DeviceFlowCodes.DeviceCode), deviceCode).ConfigureAwait(false);
+            DocumentSnapshot deviceFlowCodes =
+                await GetDeviceFlow(nameof(DeviceFlowCodes.DeviceCode), deviceCode).ConfigureAwait(false);
 
             if (deviceFlowCodes.Exists)
             {
@@ -101,7 +111,10 @@ namespace IdentityServer4.Firestore.Storage.Stores
 
         protected DeviceFlowCodes ToEntity(DeviceCode model, string deviceCode, string userCode)
         {
-            if (model == null || deviceCode == null || userCode == null) return null;
+            if (model == null || deviceCode == null || userCode == null)
+            {
+                return null;
+            }
 
             return new DeviceFlowCodes
             {
@@ -114,11 +127,10 @@ namespace IdentityServer4.Firestore.Storage.Stores
                 Data = _serializer.Serialize(model)
             };
         }
+
         protected DeviceCode ToModel(string entity)
         {
-            return entity == null ? 
-                null : 
-                _serializer.Deserialize<DeviceCode>(entity);
+            return entity == null ? null : _serializer.Deserialize<DeviceCode>(entity);
         }
     }
 }

@@ -24,7 +24,7 @@
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Firestore" />
     <PackageReference Include="IdentityServer4.Storage" />
-    <PackageReference Include="Mapster" Version="5.3.0" />
+    <PackageReference Include="AutoMapper" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" />
