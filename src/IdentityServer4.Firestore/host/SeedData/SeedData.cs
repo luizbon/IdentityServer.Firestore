@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Firestore.Storage.DbContexts;
-using Mapster;
+using IdentityServer4.Firestore.Storage.Mappers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using ApiResource = IdentityServer4.Firestore.Storage.Entities.ApiResource;
@@ -37,7 +37,7 @@ namespace Host.SeedData
                 Console.WriteLine("Clients being populated");
                 foreach (var client in Clients.Get())
                 {
-                    await context.Clients.AddAsync(client.Adapt<Client>());
+                    await context.Clients.AddAsync(client.ToEntity());
                 }
             }
             else
@@ -50,7 +50,7 @@ namespace Host.SeedData
                 Console.WriteLine("IdentityResources being populated");
                 foreach (var resource in Resources.IdentityResources)
                 {
-                    await context.IdentityResources.AddAsync(resource.Adapt<IdentityResource>());
+                    await context.IdentityResources.AddAsync(resource.ToEntity());
                 }
             }
             else
@@ -63,7 +63,7 @@ namespace Host.SeedData
                 Console.WriteLine("ApiResources being populated");
                 foreach (var resource in Resources.ApiResources)
                 {
-                    await context.ApiResources.AddAsync(resource.Adapt<ApiResource>());
+                    await context.ApiResources.AddAsync(resource.ToEntity());
                 }
             }
             else
@@ -76,7 +76,7 @@ namespace Host.SeedData
                 Console.WriteLine("Scopes being populated");
                 foreach (var resource in Resources.ApiScopes)
                 {
-                    await context.ApiScopes.AddAsync(resource.Adapt<ApiScope>());
+                    await context.ApiScopes.AddAsync(resource.ToEntity());
                 }
             }
             else
