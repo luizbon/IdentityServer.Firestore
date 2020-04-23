@@ -36,4 +36,4 @@ jobs:
       working-directory: ./src/IdentityServer4.Firestore/
 
     - name: Publish NuGet
-      run: dotnet nuget push nuget/**/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_APIKEY }}
+      run: dotnet nuget push nuget/**/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_APIKEY }} --source https://api.nuget.org/v3/index.json
