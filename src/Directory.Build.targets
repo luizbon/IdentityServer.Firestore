@@ -7,7 +7,7 @@
     <IdentityServerVersion>4.0.0-*</IdentityServerVersion>
     <GoogleVersion>2.0.0-*</GoogleVersion>
 
-    <FirestoreVersion>0.0.2-*</FirestoreVersion>
+    <FirestoreVersion>0.2.*</FirestoreVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,8 +33,8 @@
     <PackageReference Update="IdentityServer4.Storage" Version="$(IdentityServerVersion)" />
 
     <!--firestore stuff-->
-    <PackageReference Update="IdentityServer4.Firestore.Storage" Version="$(FirestoreVersion)" />
-    <PackageReference Update="IdentityServer4.Firestore" Version="$(FirestoreVersion)" />
+    <PackageReference Update="IdentityServer4.Contrib.Firestore.Storage" Version="$(FirestoreVersion)" />
+    <PackageReference Update="IdentityServer4.Contrib.Firestore" Version="$(FirestoreVersion)" />
 
     <!--google pagkages-->
     <PackageReference Update="Google.Cloud.Firestore" Version="$(GoogleVersion)" />

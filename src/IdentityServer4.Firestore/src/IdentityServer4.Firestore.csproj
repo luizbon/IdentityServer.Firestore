@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>IdentityServer4.Firestore</PackageId>
+    <PackageId>IdentityServer4.Contrib.Firestore</PackageId>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <Description>Firestore persistence layer for IdentityServer4</Description>
@@ -24,7 +24,7 @@
   
   <ItemGroup>
     <PackageReference Include="IdentityServer4" />
-    <PackageReference Include="IdentityServer4.Firestore.Storage" />
+    <PackageReference Include="IdentityServer4.Contrib.Firestore.Storage" />
 
     <PackageReference Include="Microsoft.SourceLink.GitHub" />
   </ItemGroup>
