@@ -20,9 +20,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.200
-        source-url: https://nuget.pkg.github.com/luizbon/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Create NuGet folder
       run: mkdir nuget
@@ -38,5 +35,5 @@ jobs:
       run: dotnet run --project build
       working-directory: ./src/IdentityServer4.Firestore/
 
-    - name: Publish GitHub
-      run: dotnet nuget push nuget/**/*.nupkg
+    - name: Publish NuGet
+      run: dotnet nuget push nuget/**/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_APIKEY }}
